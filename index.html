@@ -1,148 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Salon Website - Fully Responsive</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Website</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+@keyframes fade-up {
+0% { opacity:0; transform:translateY(20px); }
+100% { opacity:1; transform:translateY(0); }
+}
+.animate-fade-in-up {
+animation: fade-up 1s forwards;
+}
+
+
+/* Gallery Slide Animation */
+@keyframes slide-ltr {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(100%); }
+}
+.slide-gallery {
+animation: slide-ltr 18s linear infinite;
+}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-900">
 
-    <!-- NAVBAR -->
-    <nav class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-            <h1 class="text-2xl font-bold text-pink-600">Glamour Salon</h1>
-            <div class="space-x-6 hidden md:flex">
-                <a href="#home" class="hover:text-pink-600">Home</a>
-                <a href="#services" class="hover:text-pink-600">Services</a>
-                <a href="#team" class="hover:text-pink-600">Team</a>
-                <a href="#gallery" class="hover:text-pink-600">Gallery</a>
-                <a href="#contact" class="hover:text-pink-600">Contact</a>
-            </div>
-        </div>
-    </nav>
+<body class="bg-slate-50">
 
-    <!-- HERO SECTION WITH SLIDER -->
-    <section id="home" class="pt-24">
-        <div class="overflow-hidden w-full py-10 bg-gray-100">
-            <div class="flex space-x-6 animate-scroll overflow-x-auto whitespace-nowrap px-4">
-                <img src="https://t4.ftcdn.net/jpg/03/74/32/65/360_F_374326500_IZuSyagnKizUonpTAxmG9xoJA7LLLavU.jpg" class="rounded-xl shadow-xl w-80 h-48 md:w-96 md:h-60 object-cover inline-block" />
-                <img src="https://t4.ftcdn.net/jpg/03/74/32/65/360_F_374326500_IZuSyagnKizUonpTAxmG9xoJA7LLLavU.jpg" class="rounded-xl shadow-xl w-80 h-48 md:w-96 md:h-60 object-cover inline-block" />
-                <img src="https://t4.ftcdn.net/jpg/03/74/32/65/360_F_374326500_IZuSyagnKizUonpTAxmG9xoJA7LLLavU.jpg" class="rounded-xl shadow-xl w-80 h-48 md:w-96 md:h-60 object-cover inline-block" />
-                <img src="https://t4.ftcdn.net/jpg/03/74/32/65/360_F_374326500_IZuSyagnKizUonpTAxmG9xoJA7LLLavU.jpg" class="rounded-xl shadow-xl w-80 h-48 md:w-96 md:h-60 object-cover inline-block" />
-          
-
-
+<!-- HERO -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center" 
+       style="background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1600&q=80');">
+    <div class="absolute inset-0 bg-gradient-to-br from-teal-900/90 via-emerald-800/85 to-cyan-900/90"></div>
   </div>
-        </div>
-        <style>
-            @keyframes scroll {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-            }
-            .animate-scroll {
-                animation: scroll 18s linear infinite;
-            }
-        </style>
-    </section>
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8">Our Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 bg-gray-100 rounded-xl shadow">
-                    <h3 class="text-2xl font-semibold mb-4">Hair Styling</h3>
-                    <p>Professional hair styling, cutting & grooming.</p>
-                </div>
-                <div class="p-6 bg-gray-100 rounded-xl shadow">
-                    <h3 class="text-2xl font-semibold mb-4">Makeup</h3>
-                    <p>Bridal, party & professional makeup services.</p>
-                </div>
-                <div class="p-6 bg-gray-100 rounded-xl shadow">
-                    <h3 class="text-2xl font-semibold mb-4">Skin Care</h3>
-                    <p>Facials, cleanups and glow treatments.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Your Business Title</h1>
+    <p class="text-xl md:text-2xl mb-8 animate-fade-in-up">Your business subtitle goes here</p>
 
-    <!-- TEAM SECTION -->
-    <section id="team" class="py-16 bg-gray-100">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8">Our Team</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Sample_User_Icon.png/480px-Sample_User_Icon.png" class="w-32 h-32 rounded-full mx-auto mb-4" />
-                    <h3 class="text-xl font-semibold">Neha Sharma</h3>
-                    <p class="text-gray-600">Senior Hair Stylist</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Sample_User_Icon.png/480px-Sample_User_Icon.png" class="w-32 h-32 rounded-full mx-auto mb-4" />
-                    <h3 class="text-xl font-semibold">Riya Kapoor</h3>
-                    <p class="text-gray-600">Makeup Artist</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Sample_User_Icon.png/480px-Sample_User_Icon.png" class="w-32 h-32 rounded-full mx-auto mb-4" />
-                    <h3 class="text-xl font-semibold">Simran Kaur</h3>
-                    <p class="text-gray-600">Skin Specialist</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <button class="bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 hover:scale-105 transition-all">
+      Get Started
+    </button>
+  </div>
+</section>
+<section id="About" class="py-20 px-4 opacity-0 translate-y-10 transition-all duration-1000">
+   <div class="max-w-6xl mx-auto">
 
-    <!-- GALLERY SECTION -->
-    <section id="gallery" class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8">Gallery</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-         <img src="https://media.istockphoto.com/id/1305586787/photo/portrait-of-asian-women-hair-stylish-business-owner-standing-and-smile-inside-of-hair-salon.jpg?s=612x612&w=0&k=20&c=xPRAbuaEC8GX8dl1YaxIx9AERDSHY75uWjJI8VsEl_0=" class="rounded-xl shadow" />
-            <img src="https://www.shutterstock.com/image-photo/happy-young-asian-female-hairstylist-260nw-1942132042.jpg" class="rounded-xl shadow " />
-            <img src="https://t4.ftcdn.net/jpg/02/39/85/07/360_F_239850786_qwuTy5ufNCCqsjSpH9LTNmxo5C0YCBes.jpg" class="rounded-xl shadow " />
-            <img src="https://img.freepik.com/free-photo/woman-getting-treatment-hairdresser-shop_23-2149229813.jpg?semt=ais_hybrid&w=740&q=80" class="rounded-xl shadow " />
-            
-            </div>
-        </div>
-    </section>
+    <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">About</h2>
+ 
+       <p class="text-slate-600">At GlamAura Unisex Salon, we believe beauty is more than a look—it’s a feeling.
+Our salon is a premium destination where creativity meets expertise, offering a relaxing space for complete hair, beauty, and wellness transformations.
 
-    <!-- YOUTUBE SECTION -->
-    <section class="py-16 bg-gray-100 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">Our YouTube Channel</h2>
-        <iframe class="w-full max-w-2xl h-64 md:h-80 mx-auto rounded-xl shadow-lg" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-    </section>
-
-    <!-- CONTACT + MAP -->
-    <section id="contact" class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
-
-            <!-- CONTACT FORM -->
-            <div>
-                <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-                <form class="space-y-4">
-                    <input type="text" placeholder="Your Name" class="w-full p-3 border rounded-xl" />
-                    <input type="email" placeholder="Your Email" class="w-full p-3 border rounded-xl" />
-                    <textarea placeholder="Message" class="w-full p-3 border rounded-xl h-32"></textarea>
-                    <button class="w-full bg-pink-600 text-white p-3 rounded-xl hover:bg-pink-700">Send Message</button>
-                </form>
-            </div>
-
-            <!-- GOOGLE MAP -->
-            <div>
-                <h2 class="text-3xl font-bold mb-6">Find Us</h2>
-                <iframe class="w-full h-72 rounded-xl shadow" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- QR + WHATSAPP -->
-    <div class="fixed bottom-6 right-6 space-y-3 text-right">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://example.com" class="w-20 h-20 rounded-xl shadow" />
-        <a href="https://wa.me/919999999999" class="bg-green-500 text-white px-4 py-2 rounded-full shadow-lg block">WhatsApp</a>
+With a team of highly trained stylists, makeup artists, and skin specialists, we bring top-quality products, the latest techniques, and personalized care to every customer. Whether it's a stylish haircut, a rejuvenating skincare treatment, 
+or a glamorous makeover, we ensure every client leaves looking and feeling their absolute best...</p>
+       
     </div>
+  </div>
+</section>
+<!-- SERVICES --><section id="About" class="py-20 px-4 opacity-0 translate-y-10 transition-all duration-1000">
+   <div class="max-w-6xl mx-auto">
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 text-white py-6 text-center">
-        © 2025 Glamour Salon. All rights reserved.
-    </footer>
+    <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">OUR SERVICES</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="group bg-white p-8 rounded-xl hover:shadow-2xl transition-all hover:-translate-y-2"> 
+        <h3 class="text-2xl font-semibold mb-3 text-slate-800">Hair Cutting & Styling</h3>
+        <p class="text-slate-600">Experience precision haircuts tailored to complement your personality, 
+face shape, and lifestyle. Our expert stylists create modern, trendy, and classic looks—perfect for men, women, and kids. 
+Finish your style with professional blow-drying and setting for a flawless look..</p>
+      </div>
+
+      <div class="group bg-white p-8 rounded-xl hover:shadow-2xl transition-all hover:-translate-y-2"> 
+        <h3 class="text-2xl font-semibold mb-3 text-slate-800">Hair Coloring</h3>
+        <p class="text-slate-600">Enhance your beauty with premium hair color services. From global coloring and highlights to balayage, ombré, and root touch-ups, we use ammonia-free, long-lasting colors that nourish your hair and give
+       it a radiant shine..</p>
+      </div>
+
+      <div class="group bg-white p-8 rounded-xl hover:shadow-2xl transition-all hover:-translate-y-2"> 
+        <h3 class="text-2xl font-semibold mb-3 text-slate-800">Facial Treatments</h3>
+        <p class="text-slate-600">Pamper your skin with customized facials for glowing, refreshed, and youthful results. Choose from deep cleansing, anti-aging, hydration, detan, and whitening facials—all designed using premium skincare products..</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="py-20 px-4 bg-white opacity-0 translate-y-10 transition-all duration-1000 overflow-hidden">
+<div class="max-w-7xl mx-auto mb-10">
+<h2 class="text-4xl font-bold text-center text-slate-800">Gallery</h2>
+</div>
+
+
+<div class="whitespace-nowrap flex gap-6 slide-gallery">
+
+
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
+<img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
+<img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
+<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
+
+
+</div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="py-20 px-4 bg-slate-50 opacity-0 translate-y-10 transition-all duration-1000">
+  <div class="max-w-6xl mx-auto">
+
+    <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">Meet Our Team</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+      <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg"
+             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+        <h3 class="text-xl font-semibold">Amit Sharma</h3>
+        <p class="text-teal-600">CEO</p>
+      </div>
+
+      <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg"
+             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+        <h3 class="text-xl font-semibold">Neha Gupta</h3>
+        <p class="text-teal-600">Designer</p>
+      </div>
+
+      <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
+        <img src="https://randomuser.me/api/portraits/men/55.jpg"
+             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+        <h3 class="text-xl font-semibold">Rohit Kumar</h3>
+        <p class="text-teal-600">Developer</p>
+      </div>
+
+      <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg"
+             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+        <h3 class="text-xl font-semibold">Priya Verma</h3>
+        <p class="text-teal-600">Marketing</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-20 px-4 bg-white opacity-0 translate-y-10 transition-all duration-1000">
+  <div class="max-w-6xl mx-auto">
+
+    <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">Contact Us</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+      <div class="space-y-6">
+        <p class="text-lg font-semibold">📞 Phone: +91 98765 43210</p>
+        <p class="text-lg font-semibold">📧 Email: info@example.com</p>
+
+        <!-- QR CODE -->
+        <div>
+          <p class="text-sm text-slate-600 mb-2">Scan to visit website</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com"
+               class="w-40 h-40 border-4 border-teal-500 rounded-lg" />
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="h-96 rounded-lg overflow-hidden shadow-lg">
+        <iframe src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                class="w-full h-full"></iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-6" onclick="closeLightbox()">
+  <img id="lightbox-img" class="max-w-full max-h-full object-contain" />
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.remove('opacity-0','translate-y-10');
+  });
+});
+document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+</script>
 
 </body>
+</html>
