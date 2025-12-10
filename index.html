@@ -9,29 +9,65 @@
 
 <style>
 @keyframes fade-up {
-0% { opacity:0; transform:translateY(20px); }
-100% { opacity:1; transform:translateY(0); }
+  0% { opacity:0; transform:translateY(20px); }
+  100% { opacity:1; transform:translateY(0); }
 }
 .animate-fade-in-up {
-animation: fade-up 1s forwards;
+  animation: fade-up 1s forwards;
 }
-
 
 /* Gallery Slide Animation */
 @keyframes slide-ltr {
-0% { transform: translateX(-100%); }
-100% { transform: translateX(100%); }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 .slide-gallery {
-animation: slide-ltr 18s linear infinite;
+  animation: slide-ltr 18s linear infinite;
 }
 </style>
 </head>
 
 <body class="bg-slate-50">
 
+<!-- ---------------- HEADER ---------------- -->
+<header class="fixed top-0 left-0 w-full bg-white shadow z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+
+    <h1 class="text-2xl font-bold text-teal-700">GlamAura Salon</h1>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center gap-8 text-slate-700 font-semibold">
+      <a href="#About" class="hover:text-teal-600">About</a>
+      <a href="#services" class="hover:text-teal-600">Services</a>
+      <a href="#gallery" class="hover:text-teal-600">Gallery</a>
+      <a href="#team" class="hover:text-teal-600">Team</a>
+      <a href="#contact" class="hover:text-teal-600">Contact</a>
+
+      <!-- LOGIN BUTTON -->
+      <a href="#login" class="bg-teal-600 text-white px-5 py-2 rounded-lg hover:bg-teal-700">
+        Login
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden text-3xl">&#9776;</button>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden flex-col bg-white shadow p-4 space-y-3 text-slate-700 font-semibold">
+    <a href="#About" class="block">About</a>
+    <a href="#services" class="block">Services</a>
+    <a href="#gallery" class="block">Gallery</a>
+    <a href="#team" class="block">Team</a>
+    <a href="#contact" class="block">Contact</a>
+    <a href="#login" class="bg-teal-600 text-center text-white px-4 py-2 rounded-lg">Login</a>
+  </div>
+</header>
+<!-- ---------------- END HEADER ---------------- -->
+
+
 <!-- HERO -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<section class="relative h-screen flex items-center justify-center overflow-hidden mt-20">
   <div class="absolute inset-0 bg-cover bg-center" 
        style="background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1600&q=80');">
     <div class="absolute inset-0 bg-gradient-to-br from-teal-900/90 via-emerald-800/85 to-cyan-900/90"></div>
@@ -46,43 +82,42 @@ animation: slide-ltr 18s linear infinite;
     </button>
   </div>
 </section>
-<section id="About" class="py-20 px-4 opacity-0 translate-y-10 transition-all duration-1000">
-   <div class="max-w-6xl mx-auto">
 
+<!-- ABOUT -->
+<section id="About" class="py-20 px-4 opacity-0 translate-y-10 transition-all duration-1000">
+  <div class="max-w-6xl mx-auto">
     <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">About</h2>
- 
-       <p class="text-slate-600">At GlamAura Unisex Salon, we believe beauty is more than a look—it’s a feeling.
+    
+    <p class="text-slate-600 text-center leading-relaxed max-w-3xl mx-auto">
+      At GlamAura Unisex Salon, we believe beauty is more than a look—it’s a feeling.
 Our salon is a premium destination where creativity meets expertise, offering a relaxing space for complete hair, beauty, and wellness transformations.
 
 With a team of highly trained stylists, makeup artists, and skin specialists, we bring top-quality products, the latest techniques, and personalized care to every customer. Whether it's a stylish haircut, a rejuvenating skincare treatment, 
-or a glamorous makeover, we ensure every client leaves looking and feeling their absolute best...</p>
-       
-    </div>
+or a glamorous makeover, we ensure every client leaves looking and feeling their absolute best....
+    </p>
   </div>
 </section>
-<!-- SERVICES --><section id="About" class="py-20 px-4 opacity-0 translate-y-10 transition-all duration-1000">
-   <div class="max-w-6xl mx-auto">
 
-    <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">OUR SERVICES</h2>
+<!-- SERVICES -->
+<section id="services" class="py-20 px-4 opacity-0 translate-y-10 transition-all duration-1000">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-4 text-slate-800">Our Services</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
       <div class="group bg-white p-8 rounded-xl hover:shadow-2xl transition-all hover:-translate-y-2"> 
         <h3 class="text-2xl font-semibold mb-3 text-slate-800">Hair Cutting & Styling</h3>
-        <p class="text-slate-600">Experience precision haircuts tailored to complement your personality, 
-face shape, and lifestyle. Our expert stylists create modern, trendy, and classic looks—perfect for men, women, and kids. 
-Finish your style with professional blow-drying and setting for a flawless look..</p>
+        <p class="text-slate-600">Experience precision haircuts tailored to complement your personality...</p>
       </div>
 
       <div class="group bg-white p-8 rounded-xl hover:shadow-2xl transition-all hover:-translate-y-2"> 
         <h3 class="text-2xl font-semibold mb-3 text-slate-800">Hair Coloring</h3>
-        <p class="text-slate-600">Enhance your beauty with premium hair color services. From global coloring and highlights to balayage, ombré, and root touch-ups, we use ammonia-free, long-lasting colors that nourish your hair and give
-       it a radiant shine..</p>
+        <p class="text-slate-600">Enhance your beauty with premium hair color services...</p>
       </div>
 
       <div class="group bg-white p-8 rounded-xl hover:shadow-2xl transition-all hover:-translate-y-2"> 
         <h3 class="text-2xl font-semibold mb-3 text-slate-800">Facial Treatments</h3>
-        <p class="text-slate-600">Pamper your skin with customized facials for glowing, refreshed, and youthful results. Choose from deep cleansing, anti-aging, hydration, detan, and whitening facials—all designed using premium skincare products..</p>
+        <p class="text-slate-600">Pamper your skin with customized facials...</p>
       </div>
 
     </div>
@@ -91,22 +126,15 @@ Finish your style with professional blow-drying and setting for a flawless look.
 
 <!-- GALLERY -->
 <section id="gallery" class="py-20 px-4 bg-white opacity-0 translate-y-10 transition-all duration-1000 overflow-hidden">
-<div class="max-w-7xl mx-auto mb-10">
-<h2 class="text-4xl font-bold text-center text-slate-800">Gallery</h2>
-</div>
+  <div class="max-w-7xl mx-auto mb-10">
+    <h2 class="text-4xl font-bold text-center text-slate-800">Gallery</h2>
+  </div>
 
-
-<div class="whitespace-nowrap flex gap-6 slide-gallery">
-
-
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
-<img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
-<img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
-<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
-<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" class="w-96 h-64 object-cover rounded-xl shadow-lg" />
-
-
-</div>
+  <div class="whitespace-nowrap flex gap-6 slide-gallery overflow-x-hidden">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" class="w-80 md:w-96 h-56 md:h-64 object-cover rounded-xl shadow-lg" />
+    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" class="w-80 md:w-96 h-56 md:h-64 object-cover rounded-xl shadow-lg" />
+    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80" class="w-80 md:w-96 h-56 md:h-64 object-cover rounded-xl shadow-lg" />
+  </div>
 </section>
 
 <!-- TEAM -->
@@ -119,28 +147,28 @@ Finish your style with professional blow-drying and setting for a flawless look.
 
       <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
         <img src="https://randomuser.me/api/portraits/men/32.jpg"
-             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+             class="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full mb-4 object-cover" />
         <h3 class="text-xl font-semibold">Amit Sharma</h3>
         <p class="text-teal-600">CEO</p>
       </div>
 
       <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
         <img src="https://randomuser.me/api/portraits/women/44.jpg"
-             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+             class="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full mb-4 object-cover" />
         <h3 class="text-xl font-semibold">Neha Gupta</h3>
         <p class="text-teal-600">Designer</p>
       </div>
 
       <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
         <img src="https://randomuser.me/api/portraits/men/55.jpg"
-             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+             class="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full mb-4 object-cover" />
         <h3 class="text-xl font-semibold">Rohit Kumar</h3>
         <p class="text-teal-600">Developer</p>
       </div>
 
       <div class="bg-white p-6 text-center rounded-xl shadow hover:-translate-y-2 transition-all">
         <img src="https://randomuser.me/api/portraits/women/65.jpg"
-             class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" />
+             class="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full mb-4 object-cover" />
         <h3 class="text-xl font-semibold">Priya Verma</h3>
         <p class="text-teal-600">Marketing</p>
       </div>
@@ -179,20 +207,33 @@ Finish your style with professional blow-drying and setting for a flawless look.
   </div>
 </section>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-6" onclick="closeLightbox()">
-  <img id="lightbox-img" class="max-w-full max-h-full object-contain" />
-</div>
+<!-- LOGIN (Separate Section) -->
+<section id="login" class="py-20 px-4 bg-slate-100">
+  <div class="max-w-lg mx-auto bg-white p-10 rounded-xl shadow">
+    <h2 class="text-3xl font-bold text-center mb-6 text-slate-800">Login</h2>
 
+    <form class="space-y-6">
+      <input type="email" placeholder="Email Address" class="w-full p-3 rounded-lg border border-slate-300" required>
+      <input type="password" placeholder="Password" class="w-full p-3 rounded-lg border border-slate-300" required>
+
+      <button class="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700">
+        Login
+      </button>
+    </form>
+  </div>
+</section>
+
+
+<!-- MOBILE MENU JS -->
 <script>
-function openLightbox(src) {
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox').style.display = 'flex';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-}
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
 
+menuBtn.onclick = () => {
+  mobileMenu.classList.toggle("hidden");
+};
+
+// Fade animations on scroll
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.remove('opacity-0','translate-y-10');
