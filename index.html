@@ -86,7 +86,9 @@ html, body { scroll-behavior: smooth; }
       <a href="#About" class="hover:text-cyan-400 transition">About</a>
       <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
       <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-
+<button class="neon-btn px-6 py-2 rounded-xl bg-purple-500" data-bs-toggle="modal" data-bs-target="#priceModal">
+  Pricing
+</button>
       <!-- LOGIN -->
       <button class="neon-btn px-6 py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">
         Login
@@ -114,7 +116,9 @@ html, body { scroll-behavior: smooth; }
     <a href="#About" class="hover:text-cyan-400 transition">About</a>
     <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
     <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-
+<button class="neon-btn px-6 py-2 rounded-xl bg-purple-500" data-bs-toggle="modal" data-bs-target="#priceModal">
+  Pricing
+</button>
     <!-- Mobile Buttons -->
     <button class="neon-btn w-full py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">
       Login
@@ -294,6 +298,55 @@ html, body { scroll-behavior: smooth; }
     </div>
   </div>
 </div>
+<!-- PRICE MODAL -->
+<div class="modal fade" id="priceModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
+
+      <div class="modal-header border-0">
+        <h2 class="text-3xl text-purple-400 font-bold mx-auto">Service Price List</h2>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body space-y-6">
+
+        <!-- HAIR SERVICES -->
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-2xl font-bold text-cyan-400 mb-3">Hair Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex justify-between"><span>Hair Cut</span><span>9$</span></li>
+            <li class="flex justify-between"><span>Layer Cut</span><span>10$</span></li>
+            <li class="flex justify-between"><span>Hair Spa</span><span>11$</span></li>
+            <li class="flex justify-between"><span>Hair Smoothening</span><span>9$</span></li>
+          </ul>
+        </div>
+
+        <!-- SKIN SERVICES -->
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-2xl font-bold text-pink-400 mb-3">Skin & Facial</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex justify-between"><span>Clean Up</span><span>49$</span></li>
+            <li class="flex justify-between"><span>Classic Facial</span><span>99$</span></li>
+            <li class="flex justify-between"><span>Hydra Facial</span><span>499$</span></li>
+            <li class="flex justify-between"><span>Brightening Facial</span><span>599$</span></li>
+          </ul>
+        </div>
+
+        <!-- MAKEUP SERVICES -->
+        <div class="glass-card p-5 rounded-xl">
+          <h3 class="text-2xl font-bold text-purple-400 mb-3">Makeup</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex justify-between"><span>Party Makeup</span><span>49$</span></li>
+            <li class="flex justify-between"><span>Engagement Makeup</span><span>49$</span></li>
+            <li class="flex justify-between"><span>Bridal Makeup</span><span>79$</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 
   <!-- ADMIN MODAL -->
 <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
@@ -372,4 +425,5 @@ document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
 
 </body>
 </html>
+
 
