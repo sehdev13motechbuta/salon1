@@ -3,208 +3,202 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GlamAura Salon - Futuristic</title>
+<title>GlamAura Salon - Premium Experience</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 <style>
-/* Glassmorphism cards */
+/* GLOBAL STYLES */
+html, body { scroll-behavior: smooth; }
+
+/* Enhanced Glassmorphism */
 .glass-card {
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.3);
+  transition: 0.4s ease;
+}
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(0,255,255,0.35);
 }
 
-/* Neon buttons */
+/* Premium Neon Gradient Button */
 .neon-btn {
-  background: linear-gradient(135deg, #00fff0, #00b0ff);
-  color: #fff;
-  box-shadow: 0 0 10px #00fff0, 0 0 20px #00b0ff;
+  background: linear-gradient(135deg,#00eaff,#007bff);
+  box-shadow: 0 0 12px #00eaff, 0 0 24px #007bff;
   transition: 0.3s;
 }
 .neon-btn:hover {
-  box-shadow: 0 0 20px #00fff0, 0 0 40px #00b0ff;
-  transform: scale(1.05);
+  transform: scale(1.07);
+  box-shadow: 0 0 25px #00eaff, 0 0 50px #007bff;
 }
 
-/* Gallery slide animation */
+/* Sliding Background Animation */
+@keyframes heroSlide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.hero-slider {
+  width: 200%; height: 100%; display: flex;
+  animation: heroSlide 22s linear infinite;
+}
+.hero-slider img { width: 50%; height: 100%; object-fit: cover; }
+
+/* Gallery Animation */
 @keyframes slide-ltr {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
-.slide-gallery {
-  animation: slide-ltr 20s linear infinite;
-}
+.slide-gallery { animation: slide-ltr 18s linear infinite; }
 
-/* Fade-up animation */
-@keyframes fade-up {
-  0% { opacity:0; transform:translateY(40px); }
-  100% { opacity:1; transform:translateY(0); }
-}
-.animate-fade-in-up {
-  animation: fade-up 1.2s forwards;
-}
+/* Smooth Fade-in */
+.fade-section { opacity: 0; transform: translateY(40px); transition: 1s ease; }
+.fade-section.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 
-<body class="bg-gray-900 text-white font-sans overflow-x-hidden">
+<body class="bg-gray-950 text-white overflow-x-hidden">
 
 <!-- HEADER -->
-<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-gray-900/50 shadow-lg">
-  <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
-    <h1 class="text-2xl md:text-3xl font-extrabold text-cyan-400 tracking-wide">GlamAura Salon</h1>
+<header class="fixed w-full top-0 z-50 bg-gray-900/60 backdrop-blur-xl shadow-lg">
+  <div class="max-w-7xl mx-auto flex items-center justify-between p-5">
+    <h1 class="text-3xl font-extrabold tracking-wide text-cyan-400">GlamAura Salon</h1>
 
-    <!-- Desktop Menu -->
-    <nav class="hidden md:flex items-center gap-6 text-gray-200 font-semibold">
-      <a href="#About" class="hover:text-cyan-400 transition">About</a>
-      <a href="#services" class="hover:text-cyan-400 transition">Services</a>
-      <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
-      <a href="#team" class="hover:text-cyan-400 transition">Team</a>
-      <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-      <a href="#login" class="neon-btn px-6 py-2 rounded-lg">Login</a>
+    <nav class="hidden md:flex gap-8 text-lg">
+      <a href="#About" class="hover:text-cyan-400">About</a>
+      <a href="#services" class="hover:text-cyan-400">Services</a>
+      <a href="#gallery" class="hover:text-cyan-400">Gallery</a>
+      <a href="#team" class="hover:text-cyan-400">Team</a>
+      <a href="#contact" class="hover:text-cyan-400">Contact</a>
+      <a href="#login" class="neon-btn px-6 py-2 rounded-xl">Login</a>
     </nav>
 
-    <!-- Mobile Menu -->
-    <button id="menu-btn" class="md:hidden text-3xl">&#9776;</button>
+    <button id="menu-btn" class="md:hidden text-4xl">☰</button>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden flex-col bg-gray-900/90 p-6 space-y-4 text-gray-200 font-semibold rounded-b-xl backdrop-blur-md">
-    <a href="#About">About</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#team">Team</a>
-    <a href="#contact">Contact</a>
-    <a href="#login" class="neon-btn text-center px-4 py-2 rounded-lg block">Login</a>
-  </div>
+  <div id="mobile-menu" class="hidden md:hidden flex-col bg-gray-900/90 p-6 space-y-4 text-gray-200"></div>
 </header>
 
-<!-- HERO -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden mt-20">
-  <div class="absolute inset-0 bg-cover bg-center"
-       style="background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1600&q=80');">
-    <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/80 via-purple-900/70 to-pink-900/80 animate-fade-in-up"></div>
+<!-- HERO SECTION -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 hero-slider">
+    <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=2000&q=80" />
+    <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=2000&q=80" />
   </div>
-  <div class="relative z-10 text-center px-6 max-w-4xl">
-    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-cyan-400 animate-fade-in-up">Step Into Futuristic Beauty</h1>
-    <p class="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-up">Reinvent your style with GlamAura's cutting-edge salon experience</p>
-    <button class="neon-btn px-10 py-3 rounded-lg text-lg animate-fade-in-up">Get Started</button>
+
+  <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-900/70"></div>
+
+  <div class="text-center z-10 animate__animated animate__fadeInUp">
+    <h1 class="text-6xl md:text-7xl font-extrabold text-cyan-400 mb-4">Where Beauty Meets Innovation</h1>
+    <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">Experience luxury grooming with futuristic ambience & advanced styling technology.</p>
+    <button class="neon-btn px-10 py-3 rounded-xl text-xl">Book Now</button>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="About" class="py-24 px-4 max-w-6xl mx-auto opacity-0 translate-y-10 transition-all duration-1000">
-  <h2 class="text-4xl font-bold text-center text-cyan-400 mb-6">About Us</h2>
-  <p class="text-gray-300 text-center leading-relaxed max-w-3xl mx-auto glass-card p-6">
-    At GlamAura Unisex Salon, beauty meets innovation. Experience futuristic hair, skin, and wellness services delivered by our elite stylists using cutting-edge techniques. Step into a world where creativity, style, and technology merge seamlessly.
+<section id="About" class="py-24 fade-section max-w-6xl mx-auto px-4">
+  <h2 class="text-4xl text-center mb-6 font-bold text-cyan-400">About Us</h2>
+  <p class="glass-card p-6 text-lg leading-relaxed text-gray-200 text-center">
+    GlamAura Salon blends elegance, technology, and comfort to deliver a premium grooming experience. With expert stylists and world-class tools, we redefine beauty with modern creativity and unmatched precision.
   </p>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="py-24 px-4 max-w-6xl mx-auto opacity-0 translate-y-10 transition-all duration-1000">
-  <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Our Services</h2>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="glass-card p-8 text-gray-200 hover:scale-105 hover:shadow-cyan-400/50 transition-transform duration-500">
-      <h3 class="text-2xl font-bold mb-3 text-cyan-400">Hair Cutting & Styling</h3>
-      <p>Precision haircuts with futuristic styling tailored for your personality.</p>
+<section id="services" class="py-24 fade-section max-w-6xl mx-auto px-4">
+  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Our Services</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="glass-card p-8">
+      <h3 class="text-2xl text-cyan-400 font-bold mb-4">Hair Styling</h3>
+      <p class="text-gray-300">Modern cuts, layered styles, and trend-setting looks crafted with precision.</p>
     </div>
-    <div class="glass-card p-8 text-gray-200 hover:scale-105 hover:shadow-pink-400/50 transition-transform duration-500">
-      <h3 class="text-2xl font-bold mb-3 text-pink-400">Hair Coloring</h3>
-      <p>Transform your look with vibrant, premium hair color and treatments.</p>
+    <div class="glass-card p-8">
+      <h3 class="text-2xl text-pink-400 font-bold mb-4">Hair Color</h3>
+      <p class="text-gray-300">Balayage, global color, highlights & luxury shine treatments.</p>
     </div>
-    <div class="glass-card p-8 text-gray-200 hover:scale-105 hover:shadow-purple-400/50 transition-transform duration-500">
-      <h3 class="text-2xl font-bold mb-3 text-purple-400">Facial Treatments</h3>
-      <p>Advanced facials and skin treatments for a radiant, futuristic glow.</p>
+    <div class="glass-card p-8">
+      <h3 class="text-2xl text-purple-400 font-bold mb-4">Facials & Skin</h3>
+      <p class="text-gray-300">Glow facials, anti-aging treatments, and premium skincare solutions.</p>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
-<section id="gallery" class="py-24 px-4 opacity-0 translate-y-10 transition-all duration-1000 overflow-hidden">
-  <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Gallery</h2>
-  <div class="whitespace-nowrap flex gap-6 slide-gallery overflow-x-hidden">
-    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" class="w-80 h-56 md:h-64 object-cover rounded-xl shadow-lg hover:scale-105 transition" />
-    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" class="w-80 h-56 md:h-64 object-cover rounded-xl shadow-lg hover:scale-105 transition" />
-    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80" class="w-80 h-56 md:h-64 object-cover rounded-xl shadow-lg hover:scale-105 transition" />
-    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" class="w-80 h-56 md:h-64 object-cover rounded-xl shadow-lg hover:scale-105 transition" />
-    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" class="w-80 h-56 md:h-64 object-cover rounded-xl shadow-lg hover:scale-105 transition" />
-    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80" class="w-80 h-56 md:h-64 object-cover rounded-xl shadow-lg hover:scale-105 transition" />
- 
+<section id="gallery" class="py-24 fade-section px-4 overflow-hidden">
+  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Our Gallery</h2>
+  <div class="flex gap-6 whitespace-nowrap slide-gallery">
+    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" class="w-80 h-64 object-cover rounded-xl" />
+    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80" class="w-80 h-64 object-cover rounded-xl" />
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" class="w-80 h-64 object-cover rounded-xl" />
   </div>
 </section>
 
 <!-- TEAM -->
-<section id="team" class="py-24 px-4 opacity-0 translate-y-10 transition-all duration-1000 max-w-6xl mx-auto">
-  <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Meet Our Team</h2>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-    <div class="glass-card p-6 text-center hover:scale-105 transition">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover border-4 border-cyan-400" />
+<section id="team" class="py-24 fade-section max-w-6xl mx-auto px-4">
+  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Meet Our Experts</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="glass-card p-6 text-center">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4" />
       <h3 class="text-xl font-bold text-cyan-400">Amit Sharma</h3>
-      <p class="text-gray-200">CEO</p>
+      <p class="text-gray-300">Lead Stylist</p>
     </div>
-    <div class="glass-card p-6 text-center hover:scale-105 transition">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover border-4 border-pink-400" />
+    <div class="glass-card p-6 text-center">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 mx-auto rounded-full border-pink-400 border-4 mb-4" />
       <h3 class="text-xl font-bold text-pink-400">Neha Gupta</h3>
-      <p class="text-gray-200">Designer</p>
+      <p class="text-gray-300">Skin Specialist</p>
     </div>
-    <div class="glass-card p-6 text-center hover:scale-105 transition">
-      <img src="https://randomuser.me/api/portraits/men/55.jpg" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover border-4 border-purple-400" />
+    <div class="glass-card p-6 text-center">
+      <img src="https://randomuser.me/api/portraits/men/55.jpg" class="w-28 h-28 mx-auto rounded-full border-purple-400 border-4 mb-4" />
       <h3 class="text-xl font-bold text-purple-400">Rohit Kumar</h3>
-      <p class="text-gray-200">Developer</p>
+      <p class="text-gray-300">Creative Director</p>
     </div>
-    <div class="glass-card p-6 text-center hover:scale-105 transition">
-      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover border-4 border-cyan-400" />
+    <div class="glass-card p-6 text-center">
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4" />
       <h3 class="text-xl font-bold text-cyan-400">Priya Verma</h3>
-      <p class="text-gray-200">Marketing</p>
+      <p class="text-gray-300">Makeup Artist</p>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="py-24 px-4 opacity-0 translate-y-10 transition-all duration-1000 max-w-6xl mx-auto">
-  <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Contact Us</h2>
+<section id="contact" class="py-24 fade-section max-w-6xl mx-auto px-4">
+  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Contact Us</h2>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
     <div class="space-y-6">
-      <p class="text-lg font-semibold">📞 +91 98765 43210</p>
-      <p class="text-lg font-semibold">📧 info@example.com</p>
-      <div class="mt-4">
-        <p class="text-sm text-gray-300 mb-2">Scan to visit website</p>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com" class="w-40 h-40 border-4 border-cyan-400 rounded-lg" />
-      </div>
+      <p class="text-xl font-semibold">📞 +91 98765 43210</p>
+      <p class="text-xl font-semibold">📧 info@example.com</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com" class="w-40 h-40 border-4 border-cyan-400 rounded-xl" />
     </div>
-    <div class="h-96 rounded-xl overflow-hidden shadow-lg">
+    <div class="h-96 rounded-xl overflow-hidden shadow-xl">
       <iframe src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed" class="w-full h-full"></iframe>
     </div>
   </div>
 </section>
 
 <!-- LOGIN -->
-<section id="login" class="py-24 px-4 bg-gray-800">
+<section id="login" class="py-24 bg-gray-900 fade-section px-4">
   <div class="max-w-lg mx-auto glass-card p-10">
-    <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">Login</h2>
+    <h2 class="text-3xl text-center text-cyan-400 font-bold mb-8">Login</h2>
     <form class="space-y-6">
-      <input type="email" placeholder="Email Address" class="w-full p-3 rounded-lg border border-gray-400 bg-gray-900 text-white" required>
-      <input type="password" placeholder="Password" class="w-full p-3 rounded-lg border border-gray-400 bg-gray-900 text-white" required>
-      <button class="w-full neon-btn py-3 rounded-lg">Login</button>
+      <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
+      <input type="password" placeholder="Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
+      <button class="neon-btn w-full py-3 rounded-xl text-lg">Login</button>
     </form>
   </div>
 </section>
 
-<!-- MOBILE MENU JS -->
+<!-- SCRIPT -->
 <script>
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-menuBtn.onclick = () => mobileMenu.classList.toggle("hidden");
-
-// Scroll fade-in animations
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.remove('opacity-0','translate-y-10');
-  });
+// Fade-in Section Observer
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 });
-document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
 </script>
+
 </body>
 </html>
-
