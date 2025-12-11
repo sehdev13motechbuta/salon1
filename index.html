@@ -219,18 +219,54 @@ html, body { scroll-behavior: smooth; }
   <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Contact Us</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    <div class="space-y-6">
-      <p class="text-xl font-semibold">📞 +91 98765 43210</p>
-      <p class="text-xl font-semibold">📧 info@example.com</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com" class="w-40 h-40 border-4 border-cyan-400 rounded-xl">
+
+    <!-- LEFT BOX -->
+    <div class="glass-card p-10 rounded-2xl space-y-8 shadow-xl">
+
+      <h3 class="text-3xl font-bold text-cyan-300 text-center">Get in Touch</h3>
+
+      <div class="space-y-5 text-lg">
+
+        <p class="flex items-center gap-4">
+          <i class="fa-solid fa-phone text-cyan-400 text-2xl"></i>
+          <span>+91 98765 43210</span>
+        </p>
+
+        <p class="flex items-center gap-4">
+          <i class="fa-solid fa-envelope text-cyan-400 text-2xl"></i>
+          <span>info@example.com</span>
+        </p>
+
+        <p class="flex items-center gap-4">
+          <i class="fa-solid fa-location-dot text-cyan-400 text-2xl"></i>
+          <span>New Delhi, India</span>
+        </p>
+      </div>
+
+      <!-- CENTERED QR CODE -->
+      <div class="flex justify-center mt-8">
+        <div class="p-3 rounded-2xl border-2 border-cyan-400 shadow-cyan-500/40 shadow-xl">
+          <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://yourwebsite.com"
+            class="w-52 h-52 rounded-xl"
+          >
+        </div>
+      </div>
+
+      <p class="text-center text-gray-300 text-sm mt-3">Scan to visit our website</p>
+
     </div>
 
-    <div class="h-96 rounded-xl overflow-hidden shadow-xl">
-      <iframe src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed" class="w-full h-full"></iframe>
+    <!-- RIGHT BOX - MAP -->
+    <div class="glass-card p-3 rounded-2xl shadow-2xl">
+      <iframe 
+        src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        class="w-full h-96 rounded-xl border border-cyan-400"
+      ></iframe>
     </div>
+
   </div>
 </section>
-
 <!-- LOGIN MODAL -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
