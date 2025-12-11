@@ -75,40 +75,51 @@ html, body { scroll-behavior: smooth; }
 <!-- HEADER -->
 <header class="fixed w-full top-0 z-50 bg-gray-900/60 backdrop-blur-xl shadow-lg">
   <div class="max-w-7xl mx-auto flex items-center justify-between p-5">
-    <h1 class="text-3xl font-extrabold tracking-wide text-cyan-400">GlamAura Salon</h1>
 
-    <!-- Desktop Menu -->
-    <nav class="hidden md:flex gap-8 text-lg">
-      <a href="#About" class="hover:text-cyan-400">About</a> 
-      <a href="#gallery" class="hover:text-cyan-400">Gallery</a> 
-      <a href="#contact" class="hover:text-cyan-400">Contact</a>
+    <!-- LOGO -->
+    <h1 class="text-3xl font-extrabold tracking-wide text-cyan-400">
+      GlamAura Salon
+    </h1>
 
-      <!-- LOGIN BUTTON -->
+    <!-- DESKTOP MENU -->
+    <nav class="hidden md:flex gap-8 text-lg items-center">
+      <a href="#About" class="hover:text-cyan-400 transition">About</a>
+      <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
+      <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+
+      <!-- LOGIN -->
       <button class="neon-btn px-6 py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">
         Login
       </button>
 
-      <!-- SIGNUP BUTTON -->
+      <!-- SIGNUP -->
       <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">
         Signup
       </button>
     </nav>
 
-    <!-- Mobile Toggle -->
-    <button id="menu-btn" class="md:hidden text-4xl">☰</button>
+    <!-- MOBILE MENU BUTTON -->
+    <button id="menu-btn" class="md:hidden text-4xl text-white">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden flex-col bg-gray-900/90 p-6 space-y-4 text-gray-200">
-    <a href="#About" class="hover:text-cyan-400">About</a>
-    <a href="#services" class="hover:text-cyan-400">Services</a>
-    <a href="#gallery" class="hover:text-cyan-400">Gallery</a>
-    <a href="#team" class="hover:text-cyan-400">Team</a>
-    <a href="#contact" class="hover:text-cyan-400">Contact</a>
+  <!-- MOBILE DROPDOWN MENU -->
+  <div id="mobile-menu"
+       class="hidden flex flex-col bg-gray-900/95 shadow-2xl px-6 py-6 space-y-6 text-lg animate__animated animate__fadeInDown">
 
-    <!-- Mobile Login + Signup -->
-    <button class="neon-btn w-full py-2 rounded-xl mt-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-    <button class="neon-btn w-full py-2 rounded-xl mt-2 bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
+    <a href="#About" class="hover:text-cyan-400 transition">About</a>
+    <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
+    <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+
+    <!-- Mobile Buttons -->
+    <button class="neon-btn w-full py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">
+      Login
+    </button>
+
+    <button class="neon-btn w-full py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">
+      Signup
+    </button>
   </div>
 </header>
 
