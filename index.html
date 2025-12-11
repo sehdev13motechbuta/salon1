@@ -96,6 +96,9 @@ html, body { scroll-behavior: smooth; }
       <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">
         Signup
       </button>
+       <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#adminModal">
+        Admin login
+      </button>
     </nav>
 
     <!-- MOBILE MENU BUTTON -->
@@ -120,6 +123,9 @@ html, body { scroll-behavior: smooth; }
     <button class="neon-btn w-full py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">
       Signup
     </button>
+       <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#adminModal">
+        Admin login
+      </button>
   </div>
 </header>
 
@@ -289,6 +295,28 @@ html, body { scroll-behavior: smooth; }
   </div>
 </div>
 
+  <!-- ADMIN MODAL -->
+<div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
+
+      <div class="modal-header border-0">
+        <h2 class="text-3xl text-cyan-400 font-bold mx-auto">Admin Login</h2>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form class="space-y-5">
+          <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
+          <input type="password" placeholder="Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
+          <button type="submit" class="neon-btn w-full py-3 rounded-xl text-lg">Login</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- SIGNUP MODAL -->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -344,3 +372,4 @@ document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
 
 </body>
 </html>
+
