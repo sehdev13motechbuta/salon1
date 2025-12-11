@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>GlamAura Salon - Premium Experience</title>
+
+<!-- Animate CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
+
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Bootstrap for Modal -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
 <style>
-/* GLOBAL STYLES */
+/* GLOBAL */
 html, body { scroll-behavior: smooth; }
 
-/* Enhanced Glassmorphism */
+/* Glass Card */
 .glass-card {
   backdrop-filter: blur(20px) saturate(180%);
   background: rgba(255,255,255,0.10);
@@ -24,7 +35,7 @@ html, body { scroll-behavior: smooth; }
   box-shadow: 0 0 25px rgba(0,255,255,0.35);
 }
 
-/* Premium Neon Gradient Button */
+/* Neon Button */
 .neon-btn {
   background: linear-gradient(135deg,#00eaff,#007bff);
   box-shadow: 0 0 12px #00eaff, 0 0 24px #007bff;
@@ -35,7 +46,7 @@ html, body { scroll-behavior: smooth; }
   box-shadow: 0 0 25px #00eaff, 0 0 50px #007bff;
 }
 
-/* Sliding Background Animation */
+/* Hero Slider */
 @keyframes heroSlide {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -53,7 +64,7 @@ html, body { scroll-behavior: smooth; }
 }
 .slide-gallery { animation: slide-ltr 18s linear infinite; }
 
-/* Smooth Fade-in */
+/* Fade-in Animation */
 .fade-section { opacity: 0; transform: translateY(40px); transition: 1s ease; }
 .fade-section.visible { opacity: 1; transform: translateY(0); }
 </style>
@@ -66,22 +77,35 @@ html, body { scroll-behavior: smooth; }
   <div class="max-w-7xl mx-auto flex items-center justify-between p-5">
     <h1 class="text-3xl font-extrabold tracking-wide text-cyan-400">GlamAura Salon</h1>
 
+    <!-- Desktop Menu -->
     <nav class="hidden md:flex gap-8 text-lg">
       <a href="#About" class="hover:text-cyan-400">About</a>
       <a href="#services" class="hover:text-cyan-400">Services</a>
       <a href="#gallery" class="hover:text-cyan-400">Gallery</a>
       <a href="#team" class="hover:text-cyan-400">Team</a>
       <a href="#contact" class="hover:text-cyan-400">Contact</a>
-      <a href="#login" class="neon-btn px-6 py-2 rounded-xl">Login</a>
+
+      <!-- LOGIN BUTTON -->
+      <button type="button" class="neon-btn px-6 py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Login
+      </button>
     </nav>
 
+    <!-- Mobile Toggle -->
     <button id="menu-btn" class="md:hidden text-4xl">☰</button>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden flex-col bg-gray-900/90 p-6 space-y-4 text-gray-200"></div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden flex-col bg-gray-900/90 p-6 space-y-4 text-gray-200">
+    <a href="#About" class="hover:text-cyan-400">About</a>
+    <a href="#services" class="hover:text-cyan-400">Services</a>
+    <a href="#gallery" class="hover:text-cyan-400">Gallery</a>
+    <a href="#team" class="hover:text-cyan-400">Team</a>
+    <a href="#contact" class="hover:text-cyan-400">Contact</a>
+  </div>
 </header>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
   <div class="absolute inset-0 hero-slider">
     <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=2000&q=80" />
@@ -92,16 +116,18 @@ html, body { scroll-behavior: smooth; }
 
   <div class="text-center z-10 animate__animated animate__fadeInUp">
     <h1 class="text-6xl md:text-7xl font-extrabold text-cyan-400 mb-4">Where Beauty Meets Innovation</h1>
-    <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">Experience luxury grooming with futuristic ambience & advanced styling technology.</p>
+    <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
+      Experience luxury grooming with futuristic ambience & advanced styling technology.
+    </p>
     <button class="neon-btn px-10 py-3 rounded-xl text-xl">Book Now</button>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT SECTION -->
 <section id="About" class="py-24 fade-section max-w-6xl mx-auto px-4">
   <h2 class="text-4xl text-center mb-6 font-bold text-cyan-400">About Us</h2>
   <p class="glass-card p-6 text-lg leading-relaxed text-gray-200 text-center">
-    GlamAura Salon blends elegance, technology, and comfort to deliver a premium grooming experience. With expert stylists and world-class tools, we redefine beauty with modern creativity and unmatched precision.
+    GlamAura Salon blends elegance, technology, and comfort to deliver a premium grooming experience.
   </p>
 </section>
 
@@ -112,20 +138,24 @@ html, body { scroll-behavior: smooth; }
   <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
     <div class="glass-card p-8">
       <h3 class="text-2xl text-cyan-400 font-bold mb-4">Hair Styling</h3>
-      <p class="text-gray-300">Modern cuts, layered styles, and trend-setting looks crafted with precision.</p>
+      <p class="text-gray-300">Modern cuts, layered styles, and premium looks.</p>
     </div>
+
     <div class="glass-card p-8">
       <h3 class="text-2xl text-pink-400 font-bold mb-4">Hair Color</h3>
-      <p class="text-gray-300">Balayage, global color, highlights & luxury shine treatments.</p>
+      <p class="text-gray-300">Balayage, highlights, global color & shine solutions.</p>
     </div>
+
     <div class="glass-card p-8">
-      <h3 class="text-2xl text-purple-400 font-bold mb-4">Facials & Skin</h3>
-      <p class="text-gray-300">Glow facials, anti-aging treatments, and premium skincare solutions.</p>
+      <h3 class="text-2xl text-purple-400 font-bold mb-4">Skin & Facial</h3>
+      <p class="text-gray-300">Glow facials, anti-aging, and rejuvenation treatments.</p>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
+ 
+
 <section id="gallery" class="py-24 fade-section px-4 overflow-hidden">
   <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Our Gallery</h2>
   <div class="flex gap-6 whitespace-nowrap slide-gallery">
@@ -142,22 +172,25 @@ html, body { scroll-behavior: smooth; }
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
     <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4" />
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4">
       <h3 class="text-xl font-bold text-cyan-400">Amit Sharma</h3>
       <p class="text-gray-300">Lead Stylist</p>
     </div>
+
     <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 mx-auto rounded-full border-pink-400 border-4 mb-4" />
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 mx-auto rounded-full border-pink-400 border-4 mb-4">
       <h3 class="text-xl font-bold text-pink-400">Neha Gupta</h3>
       <p class="text-gray-300">Skin Specialist</p>
     </div>
+
     <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/men/55.jpg" class="w-28 h-28 mx-auto rounded-full border-purple-400 border-4 mb-4" />
+      <img src="https://randomuser.me/api/portraits/men/55.jpg" class="w-28 h-28 mx-auto rounded-full border-purple-400 border-4 mb-4">
       <h3 class="text-xl font-bold text-purple-400">Rohit Kumar</h3>
       <p class="text-gray-300">Creative Director</p>
     </div>
+
     <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4" />
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4">
       <h3 class="text-xl font-bold text-cyan-400">Priya Verma</h3>
       <p class="text-gray-300">Makeup Artist</p>
     </div>
@@ -172,36 +205,65 @@ html, body { scroll-behavior: smooth; }
     <div class="space-y-6">
       <p class="text-xl font-semibold">📞 +91 98765 43210</p>
       <p class="text-xl font-semibold">📧 info@example.com</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com" class="w-40 h-40 border-4 border-cyan-400 rounded-xl" />
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com" class="w-40 h-40 border-4 border-cyan-400 rounded-xl">
     </div>
+
     <div class="h-96 rounded-xl overflow-hidden shadow-xl">
       <iframe src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed" class="w-full h-full"></iframe>
     </div>
   </div>
 </section>
 
-<!-- LOGIN -->
-<section id="login" class="py-24 bg-gray-900 fade-section px-4">
-  <div class="max-w-lg mx-auto glass-card p-10">
-    <h2 class="text-3xl text-center text-cyan-400 font-bold mb-8">Login</h2>
-    <form class="space-y-6">
-      <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-      <input type="password" placeholder="Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-      <button class="neon-btn w-full py-3 rounded-xl text-lg">Login</button>
-    </form>
-  </div>
-</section>
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
 
-<!-- SCRIPT -->
+      <div class="modal-header border-0">
+        <h2 class="text-3xl text-cyan-400 font-bold mx-auto">Login</h2>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form class="space-y-5">
+          <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
+          <input type="password" placeholder="Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
+          <button type="submit" class="neon-btn w-full py-3 rounded-xl text-lg">Login</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 py-10 mt-20 text-center text-gray-400 border-t border-gray-700">
+  <h3 class="text-2xl font-bold text-cyan-400 mb-3">GlamAura Salon</h3>
+  <p class="max-w-2xl mx-auto mb-6">Premium unisex salon offering world-class grooming services.</p>
+
+  <div class="flex justify-center gap-8 text-3xl mb-6">
+    <a href="#" class="hover:text-cyan-400"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="hover:text-cyan-400"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="hover:text-cyan-400"><i class="fab fa-youtube"></i></a>
+  </div>
+
+  <p class="text-gray-500 text-sm">© 2025 GlamAura Salon. All Rights Reserved.</p>
+</footer>
+
+<!-- SCRIPTS -->
 <script>
-// Fade-in Section Observer
+document.getElementById("menu-btn").addEventListener("click", () => {
+  document.getElementById("mobile-menu").classList.toggle("hidden");
+});
+
+// Fade Sections
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 });
 document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
-
-
