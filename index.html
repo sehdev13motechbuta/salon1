@@ -1,429 +1,509 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GlamAura Salon - Premium Experience</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOURSINFO | THE NEXT ERA</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
+        
+        :root {
+            --primary-neon: #00C6FF;
+            --secondary-neon: #007BFF;
+            --bg-dark: #030712;
+        }
 
-<!-- Animate CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Space Grotesk', sans-serif;
+            color: #E5E7EB;
+            overflow-x: hidden;
+        }
 
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
+        .font-sync { font-family: 'Syncopate', sans-serif; }
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        /* --- 3D PERSPECTIVE BACKGROUND --- */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0a192f 0%, #030712 100%);
+        }
 
-<!-- Bootstrap for Modal -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        /* --- GLASSMORPHISM --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 198, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-<style>
-/* GLOBAL */
-html, body { scroll-behavior: smooth; }
+        .glass-card:hover {
+            border-color: var(--primary-neon);
+            background: rgba(0, 198, 255, 0.07);
+            box-shadow: 0 0 30px rgba(0, 198, 255, 0.2);
+        }
 
-/* Glass Card */
-.glass-card {
-  backdrop-filter: blur(20px) saturate(180%);
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 20px;
-  transition: 0.4s ease;
-}
-.glass-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 25px rgba(0,255,255,0.35);
-}
+        /* --- 3D TILT CONTAINER --- */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
 
-/* Neon Button */
-.neon-btn {
-  background: linear-gradient(135deg,#00eaff,#007bff);
-  box-shadow: 0 0 12px #00eaff, 0 0 24px #007bff;
-  transition: 0.3s;
-}
-.neon-btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 25px #00eaff, 0 0 50px #007bff;
-}
+        /* --- NEON EFFECTS --- */
+        .neon-text {
+            color: var(--primary-neon);
+            text-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+        }
 
-/* Hero Slider */
-@keyframes heroSlide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.hero-slider {
-  width: 200%; height: 100%; display: flex;
-  animation: heroSlide 22s linear infinite;
-}
-.hero-slider img { width: 50%; height: 100%; object-fit: cover; }
+        .neon-btn {
+            background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
+            transition: 0.3s;
+        }
 
-/* Gallery Animation */
-@keyframes slide-ltr {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-.slide-gallery { animation: slide-ltr 18s linear infinite; }
+        .neon-btn:hover {
+            box-shadow: 0 0 35px rgba(0, 198, 255, 0.7);
+            transform: scale(1.05);
+        }
 
-/* Fade-in Animation */
-.fade-section { opacity: 0; transform: translateY(40px); transition: 1s ease; }
-.fade-section.visible { opacity: 1; transform: translateY(0); }
-</style>
+        /* --- SCANLINE EFFECT --- */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 198, 255, 0.1);
+            position: absolute;
+            animation: scan 8s linear infinite;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* HUD Corners */
+        .hud-bracket {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--primary-neon);
+            opacity: 0.5;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-neon); border-radius: 10px; }
+    </style>
 </head>
+<body>
 
-<body class="bg-gray-950 text-white overflow-x-hidden">
+    <canvas id="bgCanvas"></canvas>
+    <div class="scanline"></div>
 
-<!-- HEADER -->
-<header class="fixed w-full top-0 z-50 bg-gray-900/60 backdrop-blur-xl shadow-lg">
-  <div class="max-w-7xl mx-auto flex items-center justify-between p-5">
+    <!-- Navigation Header -->
+    <header class="fixed top-0 w-full z-50 px-6 py-4">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center glass-card px-8 py-3 rounded-2xl">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="zap" class="text-cyan-400 w-6 h-6 animate-pulse"></i>
+                <span class="text-xl font-bold tracking-[0.3em] font-sync neon-text">YOURSINFO</span>
+            </div>
+            
+            <div class="hidden lg:flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="#services" class="hover:text-cyan-400 transition">Services</a>
+                <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
+                <a href="#team" class="hover:text-cyan-400 transition">Matrix Team</a>
+                <a href="#status" class="hover:text-cyan-400 transition">Monitoring</a>
+                <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+            </div>
 
-    <!-- LOGO -->
-    <h1 class="text-3xl font-extrabold tracking-wide text-cyan-400">
-      GlamAura Salon
-    </h1>
+            <div class="flex space-x-3">
+                <button onclick="openModal('loginModal')" class="px-4 py-2 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-lg hover:bg-white/5 transition">Login</button>
+                <button onclick="openModal('signupModal')" class="neon-btn px-4 py-2 text-[10px] font-bold text-black uppercase tracking-widest rounded-lg">Sign Up</button>
+            </div>
+        </nav>
+    </header>
 
-    <!-- DESKTOP MENU -->
-    <nav class="hidden md:flex gap-8 text-lg items-center">
-      <a href="#About" class="hover:text-cyan-400 transition">About</a>
-      <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
-      <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-<button class="neon-btn px-6 py-2 rounded-xl bg-purple-500" data-bs-toggle="modal" data-bs-target="#priceModal">
-  Pricing
-</button>
-      <!-- LOGIN -->
-      <button class="neon-btn px-6 py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">
-        Login
-      </button>
+    <main class="relative z-10 pt-32 pb-20">
+        
+        <!-- HERO SECTION -->
+        <section class="max-w-7xl mx-auto px-6 text-center mb-40" id="hero">
+            <div class="inline-block px-4 py-1 border border-cyan-500/30 rounded-full text-[10px] tracking-[0.5em] uppercase text-cyan-400 mb-8 bg-cyan-950/20 backdrop-blur-md">
+                Initiating Digital Transformation
+            </div>
+            <h1 class="text-5xl md:text-8xl font-bold font-sync mb-8 leading-tight">
+                <span class="block">THE NEXT ERA OF</span>
+                <span class="neon-text">YOURSINFO.</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-400 text-lg md:text-xl mb-12 leading-relaxed">
+                We specialize in providing top-notch IT solutions to help businesses leverage technology for growth and success. Whether you're a startup, an SME, or a large corporation.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#services" class="neon-btn px-10 py-4 text-black font-bold uppercase tracking-widest rounded-xl">Explore Services</a>
+                <a href="#contact" class="px-10 py-4 border border-cyan-500/50 text-cyan-400 font-bold uppercase tracking-widest rounded-xl hover:bg-cyan-500/10 transition">Contact Grid</a>
+            </div>
+        </section>
 
-      <!-- SIGNUP -->
-      <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">
-        Signup
-      </button>
-       <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#adminModal">
-        Admin login
-      </button>
-    </nav>
+        <!-- SERVICES SECTION -->
+        <section id="services" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+            <h2 class="text-center font-sync text-3xl mb-20 tracking-tighter uppercase"><span class="text-cyan-500">Core Services</span> Protocol</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- IT Consulting -->
+                <div class="tilt-card group">
+                    <div class="glass-card p-8 rounded-[2rem] h-full transition-all">
+                        <i data-lucide="cpu" class="w-10 h-10 text-cyan-400 mb-6"></i>
+                        <h3 class="text-xl font-bold mb-4">IT Consulting</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Our consultants offer expert advice to help you optimize your technology investments and streamline operations.</p>
+                    </div>
+                </div>
+                <!-- Data AI -->
+                <div class="tilt-card group">
+                    <div class="glass-card p-8 rounded-[2rem] h-full transition-all">
+                        <i data-lucide="database" class="w-10 h-10 text-blue-500 mb-6"></i>
+                        <h3 class="text-xl font-bold mb-4">Data & AI</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Harness the power of data with our analytics and artificial intelligence services for modern growth.</p>
+                    </div>
+                </div>
+                <!-- Custom Dev -->
+                <div class="tilt-card group">
+                    <div class="glass-card p-8 rounded-[2rem] h-full transition-all">
+                        <i data-lucide="code" class="w-10 h-10 text-purple-500 mb-6"></i>
+                        <h3 class="text-xl font-bold mb-4">Custom Dev</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Tailored software solutions from desktop applications to mobile apps designed for unique business needs.</p>
+                    </div>
+                </div>
+                <!-- Team -->
+                <div class="tilt-card group">
+                    <div class="glass-card p-8 rounded-[2rem] h-full transition-all">
+                        <i data-lucide="users" class="w-10 h-10 text-emerald-400 mb-6"></i>
+                        <h3 class="text-xl font-bold mb-4">Expert Team</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Our team is made up of experienced professionals who are passionate about technology and innovation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- MOBILE MENU BUTTON -->
-    <button id="menu-btn" class="md:hidden text-4xl text-white">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-  </div>
+        <!-- PRICING SECTION -->
+        <section id="pricing" class="max-w-7xl mx-auto px-6 py-24">
+            <h2 class="text-center font-sync text-3xl mb-12 tracking-tighter uppercase">Quantum <span class="text-cyan-500">Pricing</span></h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Tier 1 -->
+                <div class="tilt-card">
+                    <div class="glass-card p-8 rounded-3xl h-full flex flex-col border-white/5">
+                        <div class="text-cyan-500 text-xs font-bold uppercase tracking-widest mb-4">Starter</div>
+                        <div class="text-4xl font-bold mb-6">₹499</div>
+                        <ul class="text-xs text-gray-400 space-y-3 mb-8 flex-grow">
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> Wordpress Theme Free</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> Logo/Profile Image</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> 10-15 Pro Images</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> 3 Mo Maintenance</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> QR Code Scanner</li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition text-[10px] font-bold uppercase tracking-widest">Initialize</button>
+                    </div>
+                </div>
+                <!-- Tier 2 -->
+                <div class="tilt-card">
+                    <div class="glass-card p-8 rounded-3xl h-full flex flex-col border-cyan-500/50 bg-cyan-500/5 shadow-[0_0_30px_rgba(0,198,255,0.1)]">
+                        <div class="text-cyan-400 text-xs font-bold uppercase tracking-widest mb-4">Basic</div>
+                        <div class="text-4xl font-bold mb-6">₹999</div>
+                        <ul class="text-xs text-gray-300 space-y-3 mb-8 flex-grow">
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> 30-35 Pro Images</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> Google Link Integ.</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> WhatsApp Integ.</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-cyan-500"></i> 3 Mo Maintenance</li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl neon-btn text-black font-bold text-[10px] uppercase tracking-widest">Deploy Node</button>
+                    </div>
+                </div>
+                <!-- Tier 3 -->
+                <div class="tilt-card">
+                    <div class="glass-card p-8 rounded-3xl h-full flex flex-col border-white/5">
+                        <div class="text-blue-500 text-xs font-bold uppercase tracking-widest mb-4">Pro</div>
+                        <div class="text-4xl font-bold mb-6">₹1999</div>
+                        <ul class="text-xs text-gray-400 space-y-3 mb-8 flex-grow">
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-blue-500"></i> 50-60 Pro Images</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-blue-500"></i> Admin Portal</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-blue-500"></i> 6 Mo Maintenance</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-blue-500"></i> All Basic Features</li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition text-[10px] font-bold uppercase tracking-widest">Initialize</button>
+                    </div>
+                </div>
+                <!-- Tier 4 -->
+                <div class="tilt-card">
+                    <div class="glass-card p-8 rounded-3xl h-full flex flex-col border-white/5">
+                        <div class="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-4">Ultra</div>
+                        <div class="text-4xl font-bold mb-6">₹4999</div>
+                        <ul class="text-xs text-gray-400 space-y-3 mb-8 flex-grow">
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-emerald-500"></i> 100-160 Pro Images</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-emerald-500"></i> 1 Year Maintenance</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-emerald-500"></i> Full Admin Control</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-3 h-3 mr-2 text-emerald-500"></i> VIP QR Support</li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition text-[10px] font-bold uppercase tracking-widest">Initialize</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Renewable Price Notice -->
+            <div class="glass-card p-6 rounded-2xl text-center border-dashed border-cyan-500/50">
+                <p class="text-cyan-400 font-sync text-sm tracking-widest uppercase">Renewable Pricing: Same as Standard Prices</p>
+            </div>
+        </section>
 
-  <!-- MOBILE DROPDOWN MENU -->
-  <div id="mobile-menu"
-       class="hidden flex flex-col bg-gray-900/95 shadow-2xl px-6 py-6 space-y-6 text-lg animate__animated animate__fadeInDown">
+        <!-- TEAM SECTION -->
+        <section id="team" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+            <h2 class="text-center font-sync text-3xl mb-20 tracking-tighter uppercase">Operations <span class="text-cyan-500">Command</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Member 1 -->
+                <div class="text-center group">
+                    <div class="relative w-40 h-40 mx-auto mb-6">
+                        <div class="absolute inset-0 bg-cyan-500 blur-2xl opacity-20 group-hover:opacity-40 transition"></div>
+                        <img src="https://placehold.co/150x150/00C6FF/0A111F?text=S.V" class="relative w-full h-full rounded-full border-2 border-cyan-500/50 object-cover p-2">
+                    </div>
+                    <h3 class="text-lg font-bold">MR. SEHDEV VERMA</h3>
+                    <p class="text-cyan-400 text-xs font-bold uppercase tracking-widest mt-1">Managing Director</p>
+                </div>
+                <!-- Member 2 -->
+                <div class="text-center group">
+                    <div class="relative w-40 h-40 mx-auto mb-6">
+                        <div class="absolute inset-0 bg-blue-500 blur-2xl opacity-20 group-hover:opacity-40 transition"></div>
+                        <img src="https://placehold.co/150x150/007BFF/0A111F?text=A.G" class="relative w-full h-full rounded-full border-2 border-blue-500/50 object-cover p-2">
+                    </div>
+                    <h3 class="text-lg font-bold">MR. ANSHUL GARG</h3>
+                    <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mt-1">Head of Marketing</p>
+                </div>
+                <!-- Member 3 -->
+                <div class="text-center group">
+                    <div class="relative w-40 h-40 mx-auto mb-6">
+                        <div class="absolute inset-0 bg-purple-500 blur-2xl opacity-20 group-hover:opacity-40 transition"></div>
+                        <img src="https://placehold.co/150x150/8B5CF6/0A111F?text=C.V" class="relative w-full h-full rounded-full border-2 border-purple-500/50 object-cover p-2">
+                    </div>
+                    <h3 class="text-lg font-bold">MRS. CHETNA VERMA</h3>
+                    <p class="text-purple-400 text-xs font-bold uppercase tracking-widest mt-1">CEO</p>
+                </div>
+                <!-- Member 4 -->
+                <div class="text-center group">
+                    <div class="relative w-40 h-40 mx-auto mb-6">
+                        <div class="absolute inset-0 bg-emerald-500 blur-2xl opacity-20 group-hover:opacity-40 transition"></div>
+                        <img src="https://placehold.co/150x150/10B981/0A111F?text=S.S" class="relative w-full h-full rounded-full border-2 border-emerald-500/50 object-cover p-2">
+                    </div>
+                    <h3 class="text-lg font-bold">MR. SACHIN SAINI</h3>
+                    <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest mt-1">Marketing Manager</p>
+                </div>
+            </div>
+        </section>
 
-    <a href="#About" class="hover:text-cyan-400 transition">About</a>
-    <a href="#gallery" class="hover:text-cyan-400 transition">Gallery</a>
-    <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-<button class="neon-btn px-6 py-2 rounded-xl bg-purple-500" data-bs-toggle="modal" data-bs-target="#priceModal">
-  Pricing
-</button>
-    <!-- Mobile Buttons -->
-    <button class="neon-btn w-full py-2 rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">
-      Login
-    </button>
+        <!-- MONITOR SECTION -->
+        <section id="status" class="max-w-7xl mx-auto px-6 py-24">
+            <div class="glass-card rounded-[3rem] p-12 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                    <div>
+                        <h3 class="text-2xl font-bold font-sync mb-2">SYSTEM HEALTH</h3>
+                        <p class="text-gray-500 text-xs tracking-widest uppercase">Live Global Node Monitoring</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-cyan-500/10 px-6 py-3 rounded-full border border-cyan-500/20">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                        </span>
+                        <span id="nodeStatus" class="font-bold text-xs tracking-widest uppercase text-cyan-400">Node Online</span>
+                    </div>
+                </div>
 
-    <button class="neon-btn w-full py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#signupModal">
-      Signup
-    </button>
-       <button class="neon-btn px-6 py-2 rounded-xl bg-green-500" data-bs-toggle="modal" data-bs-target="#adminModal">
-        Admin login
-      </button>
-  </div>
-</header>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Latency -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-xs font-bold tracking-widest">
+                            <span>LATENCY PROTOCOL</span>
+                            <span id="latencyDisplay" class="text-cyan-400">-- ms</span>
+                        </div>
+                        <div class="h-1 w-full bg-white/5 rounded-full">
+                            <div id="latencyGauge" class="h-full bg-cyan-500 transition-all duration-700" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- Throughput -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-xs font-bold tracking-widest">
+                            <span>DATA THROUGHPUT</span>
+                            <span id="throughputDisplay" class="text-white">-- GB/s</span>
+                        </div>
+                        <div class="h-1 w-full bg-white/5 rounded-full">
+                            <div id="throughputBar" class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-700" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- HERO -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
-  <div class="absolute inset-0 hero-slider">
-    <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=2000&q=80" />
-    <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=2000&q=80" />
-  </div>
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="font-sync text-4xl mb-8 leading-tight">ESTABLISH <br><span class="text-cyan-500">COMMUNICATION</span></h2>
+                    <div class="space-y-8">
+                        <div class="flex items-center space-x-6">
+                            <div class="w-12 h-12 glass-card rounded-xl flex items-center justify-center text-cyan-400">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 tracking-widest uppercase mb-1">Support Channel</p>
+                                <p class="font-bold">Admin@yoursinfo.ni</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                            <div class="w-12 h-12 glass-card rounded-xl flex items-center justify-center text-cyan-400">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 tracking-widest uppercase mb-1">Comm. Line</p>
+                                <p class="font-bold">+8708482957 (National Node)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="https://placehold.co/600x300/141C2E/00C6FF?text=DATACENTER+STATUS" class="mt-12 rounded-3xl opacity-50 border border-white/5 grayscale hover:grayscale-0 transition duration-500">
+                </div>
 
-  <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-900/70"></div>
+                <div class="glass-card p-10 rounded-[3rem]">
+                    <form class="space-y-6">
+                        <div>
+                            <label class="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-500 mb-2 block">Identifier</label>
+                            <input type="text" placeholder="Your Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-500 mb-2 block">Secure Email</label>
+                            <input type="email" placeholder="email@nexus.com" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-500 mb-2 block">Transmission Body</label>
+                            <textarea rows="4" placeholder="Enter message..." class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none transition"></textarea>
+                        </div>
+                        <button class="w-full py-4 neon-btn text-black font-bold uppercase tracking-widest rounded-xl">Transmit Signal</button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-  <div class="text-center z-10 animate__animated animate__fadeInUp">
-    <h1 class="text-6xl md:text-7xl font-extrabold text-cyan-400 mb-4">Where Beauty Meets Innovation</h1>
-    <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
-      Experience luxury grooming with futuristic ambience & advanced styling technology.
-    </p>
-    <button class="neon-btn px-10 py-3 rounded-xl text-xl">Book Now</button>
-  </div>
-</section>
+    </main>
 
-<!-- ABOUT SECTION -->
-<section id="About" class="py-24 fade-section max-w-6xl mx-auto px-4">
-  <h2 class="text-4xl text-center mb-6 font-bold text-cyan-400">About Us</h2>
-  <p class="glass-card p-6 text-lg leading-relaxed text-gray-200 text-center">
-     At GlamAura Salon Unisex Salon, we are committed to providing a premium grooming and beauty experience. 
-   Whether you want to book an appointment, ask a question, or know more about our services, we’re always happy to assist you..
-  </p>
-</section>
+    <footer class="py-12 border-t border-white/5 bg-black/50 backdrop-blur-2xl text-center relative z-10">
+        <p class="text-[10px] tracking-[0.5em] text-gray-600 uppercase">&copy; 2024 Protocols Reserved. Initiating Secure Connection by YoursInfo.in</p>
+    </footer>
 
-<!-- SERVICES -->
-<section id="services" class="py-24 fade-section max-w-6xl mx-auto px-4">
-  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Our Services</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-    <div class="glass-card p-8">
-      <h3 class="text-2xl text-cyan-400 font-bold mb-4">Hair Styling</hh3>
-      <p class="text-gray-300">Modern cuts, layered styles, and premium looks.</p>
-    </div>
-
-    <div class="glass-card p-8">
-      <h3 class="text-2xl text-pink-400 font-bold mb-4">Hair Color</h3>
-      <p class="text-gray-300">Balayage, highlights, global color & shine solutions.</p>
-    </div>
-
-    <div class="glass-card p-8">
-      <h3 class="text-2xl text-purple-400 font-bold mb-4">Skin & Facial</h3>
-      <p class="text-gray-300">Glow facials, anti-aging, and rejuvenation treatments.</p>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery" class="py-24 fade-section px-4 overflow-hidden">
-  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Our Gallery</h2>
-  <div class="flex gap-6 whitespace-nowrap slide-gallery">
-    <img src="https://www.shutterstock.com/image-photo/adult-woman-hairdresser-stylist-gives-260nw-2700758577.jpg" class="w-80 h-64 object-cover rounded-xl" />
-    <img src="https://previews.123rf.com/images/satura86/satura861706/satura86170602394/80147170-beauty-and-people-concept-happy-young-woman-with-hairdresser-at-hair-salon.jpg" class="w-80 h-64 object-cover rounded-xl" />
-    <img src="https://thumbs.dreamstime.com/b/young-woman-looking-changes-trying-new-hairstyle-beauty-salon-empty-space-392795252.jpg" class="w-80 h-64 object-cover rounded-xl" />
-    <img src="https://st4.depositphotos.com/10614052/20443/i/1600/depositphotos_204435540-stock-photo-professional-hairdresser-working-client-beauty.jpg" class="w-80 h-64 object-cover rounded-xl" />
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="team" class="py-24 fade-section max-w-6xl mx-auto px-4">
-  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Meet Our Experts</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-    <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4">
-      <h3 class="text-xl font-bold text-cyan-400">Amit Sharma</h3>
-      <p class="text-gray-300">Lead Stylist</p>
-    </div>
-
-    <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 mx-auto rounded-full border-pink-400 border-4 mb-4">
-      <h3 class="text-xl font-bold text-pink-400">Neha Gupta</h3>
-      <p class="text-gray-300">Skin Specialist</p>
-    </div>
-
-    <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/men/55.jpg" class="w-28 h-28 mx-auto rounded-full border-purple-400 border-4 mb-4">
-      <h3 class="text-xl font-bold text-purple-400">Rohit Kumar</h3>
-      <p class="text-gray-300">Creative Director</p>
-    </div>
-
-    <div class="glass-card p-6 text-center">
-      <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-28 h-28 mx-auto rounded-full border-cyan-400 border-4 mb-4">
-      <h3 class="text-xl font-bold text-cyan-400">Priya Verma</h3>
-      <p class="text-gray-300">Makeup Artist</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="py-24 fade-section max-w-6xl mx-auto px-4">
-  <h2 class="text-4xl text-center text-cyan-400 font-bold mb-12">Contact Us</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-    <!-- LEFT BOX -->
-    <div class="glass-card p-10 rounded-2xl space-y-8 shadow-xl">
-
-      <h3 class="text-3xl font-bold text-cyan-300 text-center">Get in Touch</h3>
-
-      <div class="space-y-5 text-lg">
-
-        <p class="flex items-center gap-4">
-          <i class="fa-solid fa-phone text-cyan-400 text-2xl"></i>
-          <span>+91 98765 43210</span>
-        </p>
-
-        <p class="flex items-center gap-4">
-          <i class="fa-solid fa-envelope text-cyan-400 text-2xl"></i>
-          <span>info@example.com</span>
-        </p>
-
-        <p class="flex items-center gap-4">
-          <i class="fa-solid fa-location-dot text-cyan-400 text-2xl"></i>
-          <span>New Delhi, India</span>
-        </p>
-      </div>
-
-      <!-- CENTERED QR CODE -->
-      <div class="flex justify-center mt-8">
-        <div class="p-3 rounded-2xl border-2 border-cyan-400 shadow-cyan-500/40 shadow-xl">
-          <img 
-            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://yourwebsite.com"
-            class="w-52 h-52 rounded-xl"
-          >
+    <!-- MODALS -->
+    <div id="loginModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-xl bg-black/80" onclick="closeModal('loginModal')">
+        <div class="glass-card w-full max-w-md p-10 rounded-[2.5rem] border-cyan-500/30" onclick="event.stopPropagation()">
+            <h3 class="text-xl font-bold font-sync mb-8 neon-text uppercase tracking-widest text-center">Login Protocol</h3>
+            <form class="space-y-4">
+                <input type="text" placeholder="Access ID" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none">
+                <input type="password" placeholder="Auth Key" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none">
+                <button class="w-full py-4 neon-btn text-black font-bold rounded-xl uppercase tracking-widest mt-4">Access Matrix</button>
+            </form>
         </div>
-      </div>
-
-      <p class="text-center text-gray-300 text-sm mt-3">Scan to visit our website</p>
-
     </div>
 
-    <!-- RIGHT BOX - MAP -->
-    <div class="glass-card p-3 rounded-2xl shadow-2xl">
-      <iframe 
-        src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
-        class="w-full h-96 rounded-xl border border-cyan-400"
-      ></iframe>
-    </div>
-
-  </div>
-</section>
-<!-- LOGIN MODAL -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
-
-      <div class="modal-header border-0">
-        <h2 class="text-3xl text-cyan-400 font-bold mx-auto">Login</h2>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-        <form class="space-y-5">
-          <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <input type="password" placeholder="Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <button type="submit" class="neon-btn w-full py-3 rounded-xl text-lg">Login</button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-<!-- PRICE MODAL -->
-<div class="modal fade" id="priceModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
-
-      <div class="modal-header border-0">
-        <h2 class="text-3xl text-purple-400 font-bold mx-auto">Service Price List</h2>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body space-y-6">
-
-        <!-- HAIR SERVICES -->
-        <div class="glass-card p-5 rounded-xl">
-          <h3 class="text-2xl font-bold text-cyan-400 mb-3">Hair Services</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li class="flex justify-between"><span>Hair Cut</span><span>9$</span></li>
-            <li class="flex justify-between"><span>Layer Cut</span><span>10$</span></li>
-            <li class="flex justify-between"><span>Hair Spa</span><span>11$</span></li>
-            <li class="flex justify-between"><span>Hair Smoothening</span><span>9$</span></li>
-          </ul>
+    <div id="signupModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-xl bg-black/80" onclick="closeModal('signupModal')">
+        <div class="glass-card w-full max-w-md p-10 rounded-[2.5rem] border-cyan-500/30" onclick="event.stopPropagation()">
+            <h3 class="text-xl font-bold font-sync mb-8 neon-text uppercase tracking-widest text-center">New Node Registry</h3>
+            <form class="space-y-4">
+                <input type="text" placeholder="Desired ID" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none">
+                <input type="email" placeholder="Contact Nexus (Email)" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none">
+                <input type="password" placeholder="Create Auth Key" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-cyan-500 outline-none">
+                <button class="w-full py-4 neon-btn text-black font-bold rounded-xl uppercase tracking-widest mt-4">Establish Node</button>
+            </form>
         </div>
-
-        <!-- SKIN SERVICES -->
-        <div class="glass-card p-5 rounded-xl">
-          <h3 class="text-2xl font-bold text-pink-400 mb-3">Skin & Facial</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li class="flex justify-between"><span>Clean Up</span><span>49$</span></li>
-            <li class="flex justify-between"><span>Classic Facial</span><span>99$</span></li>
-            <li class="flex justify-between"><span>Hydra Facial</span><span>499$</span></li>
-            <li class="flex justify-between"><span>Brightening Facial</span><span>599$</span></li>
-          </ul>
-        </div>
-
-        <!-- MAKEUP SERVICES -->
-        <div class="glass-card p-5 rounded-xl">
-          <h3 class="text-2xl font-bold text-purple-400 mb-3">Makeup</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li class="flex justify-between"><span>Party Makeup</span><span>49$</span></li>
-            <li class="flex justify-between"><span>Engagement Makeup</span><span>49$</span></li>
-            <li class="flex justify-between"><span>Bridal Makeup</span><span>79$</span></li>
-          </ul>
-        </div>
-
-      </div>
-
     </div>
-  </div>
-</div>
 
-  <!-- ADMIN MODAL -->
-<div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
+    <script>
+        // --- 3D PERSPECTIVE GRID CANVAS ---
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, offset = 0;
 
-      <div class="modal-header border-0">
-        <h2 class="text-3xl text-cyan-400 font-bold mx-auto">Admin Login</h2>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
 
-      <div class="modal-body">
-        <form class="space-y-5">
-          <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <input type="password" placeholder="Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <button type="submit" class="neon-btn w-full py-3 rounded-xl text-lg">Login</button>
-        </form>
-      </div>
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.strokeStyle = 'rgba(0, 198, 255, 0.1)';
+            ctx.lineWidth = 1;
 
-    </div>
-  </div>
-</div>
+            const horizon = height * 0.45;
+            const step = 60;
+            
+            // Vanishing Vertical Lines
+            for(let i = -width; i <= width * 2; i += step) {
+                ctx.beginPath();
+                ctx.moveTo(width / 2, horizon);
+                ctx.lineTo(i, height);
+                ctx.stroke();
+            }
 
-<!-- SIGNUP MODAL -->
-<div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-gray-900 rounded-2xl p-6 glass-card">
+            // Moving Perspective Horizontal Lines
+            offset = (offset + 1.5) % step;
+            for(let i = 0; i < 20; i++) {
+                let y = horizon + (Math.pow(i + offset/step, 2.5) * 1.5);
+                if (y > height) continue;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+            requestAnimationFrame(draw);
+        }
 
-      <div class="modal-header border-0">
-        <h2 class="text-3xl text-green-400 font-bold mx-auto">Signup</h2>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
+        window.addEventListener('resize', resize);
+        resize(); draw();
 
-      <div class="modal-body">
-        <form class="space-y-5">
-          <input type="text" placeholder="Full Name" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <input type="email" placeholder="Email Address" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <input type="password" placeholder="Create Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <input type="password" placeholder="Confirm Password" class="w-full p-3 rounded-xl bg-gray-800 border border-gray-600" />
-          <button type="submit" class="neon-btn w-full py-3 rounded-xl text-lg bg-green-500">Signup</button>
-        </form>
-      </div>
+        // --- 3D TILT EFFECT ---
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.querySelector('.glass-card').style.transform = `perspective(1000px) rotateX(${y * -20}deg) rotateY(${x * 20}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('.glass-card').style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
 
-    </div>
-  </div>
-</div>
+        // --- MONITOR LOGIC ---
+        function updateMonitor() {
+            const lat = Math.floor(Math.random() * 55) + 5;
+            const through = (Math.random() * 100 + 150).toFixed(2);
+            
+            document.getElementById('latencyDisplay').innerText = lat + ' ms';
+            document.getElementById('throughputDisplay').innerText = through + ' GB/s';
+            document.getElementById('latencyGauge').style.width = (lat/60 * 100) + '%';
+            document.getElementById('throughputBar').style.width = ((through - 150) / 100 * 100) + '%';
+        }
+        setInterval(updateMonitor, 2000);
 
-<!-- FOOTER -->
-<footer class="bg-gray-900 py-10 mt-20 text-center text-gray-400 border-t border-gray-700">
-  <h3 class="text-2xl font-bold text-cyan-400 mb-3">GlamAura Salon</h3>
-  <p class="max-w-2xl mx-auto mb-6">Premium unisex salon offering world-class grooming services.</p>
+        // --- MODALS ---
+        function openModal(id) { 
+            const m = document.getElementById(id); 
+            m.classList.remove('hidden'); 
+            setTimeout(() => m.style.opacity = '1', 10);
+        }
+        function closeModal(id) { 
+            const m = document.getElementById(id); 
+            m.style.opacity = '0'; 
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
 
-  <div class="flex justify-center gap-8 text-3xl mb-6">
-    <a href="#" class="hover:text-cyan-400"><i class="fab fa-facebook"></i></a>
-    <a href="#" class="hover:text-cyan-400"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="hover:text-cyan-400"><i class="fab fa-youtube"></i></a>
-  </div>
-
-  <p class="text-gray-500 text-sm">© 2025 GlamAura Salon. All Rights Reserved.</p>
-</footer>
-
-<!-- SCRIPTS -->
-<script>
-document.getElementById("menu-btn").addEventListener("click", () => {
-  document.getElementById("mobile-menu").classList.toggle("hidden");
-});
-
-// Fade Sections
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-});
-document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+        lucide.createIcons();
+    </script>
 </body>
 </html>
-
-
