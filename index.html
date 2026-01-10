@@ -214,6 +214,99 @@
             .hero-content h1 { font-size: 32px; }
             .form-row { flex-direction: column; }
         }
+/* --- Updated Top Bar Styling --- */
+.top-bar {
+    background: #fff;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap; /* Allows items to move to next line if they don't fit */
+}
+
+.top-info {
+    display: flex;
+    gap: 15px;
+}
+
+.top-info a {
+    color: #444;
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.top-info i {
+    color: #3b82f6; /* Matching the blue in your image */
+}
+
+.top-social {
+    display: flex;
+    gap: 12px;
+}
+
+.top-social i {
+    cursor: pointer;
+    color: #666;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.top-social i:hover {
+    color: #3b82f6;
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet and Mobile Adjustments */
+@media (max-width: 992px) {
+    .top-bar {
+        justify-content: center; /* Center everything on tablets */
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 10px 2%;
+        flex-direction: column; /* Stacks info on top and icons on bottom */
+        gap: 8px;
+    }
+    
+    .top-info {
+        font-size: 12px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .top-social {
+        justify-content: center;
+        width: 100%;
+        border-top: 1px solid #f0f0f0;
+        padding-top: 8px;
+    }
+    
+    /* Navigation links usually need a menu button on mobile, 
+       but we keep them visible/hidden based on your design choice */
+    .nav-links {
+        display: none; /* Usually hidden behind a hamburger icon on mobile */
+    }
+}
+
+/* Very Small Mobile Screens */
+@media (max-width: 480px) {
+    .top-info {
+        flex-direction: column; /* Stack Email and Phone on very small phones */
+        align-items: center;
+        gap: 5px;
+    }
+    .top-social {
+        gap: 15px; /* Increase gap for easier tapping on small screens */
+    }
+}
     </style>
 </head>
 <body>
